@@ -8,6 +8,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@radix-ui/rea
 import { motion, AnimatePresence } from "framer-motion";
 import { addQuote } from "../actions/addQuote";
 import ParticleBackground from "../ParticleBackground";
+import BackgroundMusic from "./BackgroundMusic";
 
 interface QuoteDisplayProps {
   initialQuotes: string[];
@@ -39,6 +40,7 @@ export default function QuoteDisplay({ initialQuotes }: QuoteDisplayProps) {
   return (
     <>
       <ParticleBackground />
+      <BackgroundMusic />
 
       {/* Main content */}
       <div className="z-10 flex flex-col items-center justify-center gap-16 text-center">
@@ -65,7 +67,6 @@ export default function QuoteDisplay({ initialQuotes }: QuoteDisplayProps) {
         </AnimatePresence>
 
         <div className="flex flex-col items-center gap-4">
-          <p className="text-gray-400">Share your own reflection</p>
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <Button variant="outline" className="bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm">
