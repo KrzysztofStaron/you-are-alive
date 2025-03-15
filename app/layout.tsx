@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     description: "A poetic reminder of the beauty and miracle of existence",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +35,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>{children}</body>
     </html>
   );
