@@ -45,7 +45,7 @@ export default function QuoteDisplay() {
       await addQuote(newQuote.trim());
       setNewQuote("");
       setIsOpen(false);
-      // Note: Quote will appear after page refresh
+      setQuotes(prev => [...prev, newQuote.trim()]);
     }
   };
 
