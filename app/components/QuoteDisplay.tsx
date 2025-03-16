@@ -9,18 +9,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { addQuote } from "../actions/addQuote";
 import ParticleBackground from "../ParticleBackground";
 import BackgroundMusic from "./BackgroundMusic";
+import { getQuotes } from "../actions/getQuotes";
 
 interface QuoteDisplayProps {
   initialQuotes: string[];
 }
 
-export default function QuoteDisplay({ initialQuotes }: QuoteDisplayProps) {
-  const [quotes] = useState(initialQuotes);
+export default function QuoteDisplay() {
+  const [quotes, setQuotes] = useState<string[]>([]);
   const [currentQuote, setCurrentQuote] = useState(0);
   const [newQuote, setNewQuote] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    getQuotes().then(q => {
+      setQuotes(q);
+    });
     const interval = setInterval(() => {
       setCurrentQuote(prev => (prev + 1) % quotes.length);
     }, 4000);
