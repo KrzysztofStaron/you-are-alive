@@ -25,9 +25,11 @@ export default function QuoteDisplay() {
     getQuotes().then(q => {
       setQuotes(q);
     });
+
     const interval = setInterval(() => {
-      setCurrentQuote(prev => (prev + 1) % quotes.length);
+      setCurrentQuote(prev => Math.round(Math.random() * quotes.length));
     }, 4000);
+
     return () => clearInterval(interval);
   }, [quotes]);
 
