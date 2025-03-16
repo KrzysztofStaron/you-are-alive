@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogHeader } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -21,17 +21,23 @@ export default function QuoteDisplay() {
   const [newQuote, setNewQuote] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
+  const generatorFunction = useCallback(() => {
+    setCurrentQuote(prev => Math.floor(Math.random() * quotes.length));
+  }, [quotes]);
+
   useEffect(() => {
     getQuotes().then(q => {
       setQuotes(q);
     });
+  }, []);
 
-    const interval = setInterval(() => {
-      setCurrentQuote(prev => Math.round(Math.random() * quotes.length));
-    }, 4000);
+  useEffect(() => {
+    if (quotes.length === 0) return;
 
-    return () => clearInterval(interval);
-  }, [quotes]);
+    const intervalId = setInterval(generatorFunction, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [quotes, generatorFunction]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
